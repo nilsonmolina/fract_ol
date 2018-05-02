@@ -14,9 +14,9 @@
 /*
 ** ------ VARIABLES ------
 */
-# define WIN_WIDTH		1280
-# define WIN_HEIGHT		720
-# define THREADS        13
+# define WIN_WIDTH		800
+# define WIN_HEIGHT		600
+# define THREADS        16
 # define OFF_X			0
 # define OFF_Y			0
 # define ROT_DEGREES	5
@@ -25,12 +25,20 @@
 /*
 ** ------ STRUCTS ------
 */
+typedef enum	e_fractal
+{
+	mandelbrot = 1,
+	julia,
+	burning_ship,
+	triforce
+}				t_fractal;
+
 typedef struct	s_img
 {
 	int			bpp;
 	int			sl;
 	int			e;
-	void		*img;
+	void		*ptr;
 	int			*data;
 	int			width;
 	int			height;
@@ -41,9 +49,8 @@ typedef struct	s_canvas
 	void		*mlx;
 	void		*window;
 	t_img		img;
-	int			shft;
-	int			mode;
-	int			color_on;
+	t_fractal	fractal;
+
 }				t_canvas;
 
 /*
@@ -51,11 +58,15 @@ typedef struct	s_canvas
 ** main.c
 */
 void			usage();
+void			check_error(int err, char *msg);
 
 /*
 ** events.c
 */
-
+int				key_up(int key, t_canvas *c);
+int				key_hold(int key, t_canvas *c);
+int				mouse_motion(int x, int y, t_canvas *c);
+int				mouse_click(int mouse, int x, int y, t_canvas *c);
 
 /*
 ** fractals.c
