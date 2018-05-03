@@ -9,14 +9,14 @@
 # include <math.h>
 # include <pthread.h>
 
-#include <stdio.h> // remove this before turning in
+# include <stdio.h> // remove this before turning in
 
 /*
 ** ------ VARIABLES ------
 */
 # define WIN_WIDTH		800
 # define WIN_HEIGHT		600
-# define THREADS        16
+# define THREADS        4
 # define OFF_X			0
 # define OFF_Y			0
 # define ROT_DEGREES	5
@@ -50,7 +50,13 @@ typedef struct	s_canvas
 	void		*window;
 	t_img		img;
 	t_fractal	fractal;
-
+	int			start;
+	int			end;
+	int			color;
+	int			max_iter;	
+	double		zoom;
+	double		offset_x;
+	double		offset_y;
 }				t_canvas;
 
 /*
@@ -69,8 +75,15 @@ int				mouse_motion(int x, int y, t_canvas *c);
 int				mouse_click(int mouse, int x, int y, t_canvas *c);
 
 /*
+** render.c
+*/
+void			pthread(t_canvas *c);
+void			put_img_vector(t_canvas *c, int x, int y);
+
+/*
 ** fractals.c
 */
+void			*mandelbrot_set(void* param);
 
 
 #endif

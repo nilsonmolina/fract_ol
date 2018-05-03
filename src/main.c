@@ -6,13 +6,13 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/01 22:18:51 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/02 15:24:55 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_canvas    init()
+t_canvas    init(int f)
 {
     t_canvas    *c;
 
@@ -25,7 +25,14 @@ t_canvas    init()
 	c->img.ptr = mlx_new_image(c->mlx, c->img.width, c->img.height);
 	c->img.data = (int *)mlx_get_data_addr(c->img.ptr,
 			&c->img.bpp, &c->img.sl, &c->img.e);
-
+	c->fractal = f;
+	c->start = 0;
+	c->end = 0;
+	c->zoom = 1;
+	c->max_iter = 50;
+	c->offset_x = 0;
+	c->offset_y = 0;
+	c->color = 0xFFFFFF;
     return (*c);
 }
 
@@ -33,12 +40,11 @@ int     main(int argc, char **argv)
 {
     t_canvas c;
 
-    if (argc != 2 || argv[1][1] != '\0' || (argv[1][0] != '1' 
-    && argv[1][0] != '2' && argv[1][0] != '3' && argv[1][0] != '4'))
+    if (argc != 2 || argv[1][1] != '\0' || 
+		!(1 <= argv[1][0] - '0' && argv[1][0] - '0' <= 4))
         usage();
-    ft_bzero(&c, sizeof(c));
-    c = init();
-    // pthread(c);
+    c = init(argv[1][0] - '0');
+    pthread(&c);
 	mlx_hook(c.window, 2, 0, key_hold, &c);
 	mlx_hook(c.window, 6, 0, mouse_motion, &c);
     mlx_key_hook(c.window, key_up, &c);
