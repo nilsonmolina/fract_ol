@@ -6,17 +6,17 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/02 15:24:55 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 00:46:38 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_canvas    init(int f)
+t_canvas    *init(t_fractal f)
 {
     t_canvas    *c;
 
-    if (!(c = malloc(sizeof(t_canvas))))
+    if (!(c = (t_canvas *)malloc(sizeof(t_canvas))))
 		check_error(0, "failed to malloc canvas.");
     c->mlx = mlx_init();
     c->window = mlx_new_window(c->mlx, WIN_WIDTH, WIN_HEIGHT, "fract_ol");
@@ -32,35 +32,40 @@ t_canvas    init(int f)
 	c->max_iter = 50;
 	c->offset_x = 0;
 	c->offset_y = 0;
+	c->mouse_x = 0;
+	c->mouse_y = 0;
 	c->color = 0xFFFFFF;
-    return (*c);
+    return (c);
 }
 
 int     main(int argc, char **argv)
 {
-    t_canvas c;
+    t_canvas	*c;
+	t_fractal	f;
 
-    if (argc != 2 || argv[1][1] != '\0' || 
-		!(1 <= argv[1][0] - '0' && argv[1][0] - '0' <= 4))
+    if (argc != 2 || argv[1][1] != '\0')
         usage();
-    c = init(argv[1][0] - '0');
-    pthread(&c);
-	mlx_hook(c.window, 2, 0, key_hold, &c);
-	mlx_hook(c.window, 6, 0, mouse_motion, &c);
-    mlx_key_hook(c.window, key_up, &c);
-	mlx_mouse_hook(c.window, mouse_click, &c);
-    mlx_loop(c.mlx);
+	f = argv[1][0] - '0';
+	if (!(1 <= f && f <= 4))
+		usage();
+    c = init(f);
+    draw(c);
+	mlx_hook(c->window, 2, 0, key_hold, c);
+	mlx_hook(c->window, 6, 0, mouse_motion, c);
+	mlx_mouse_hook(c->window, mouse_click, c);
+    // mlx_key_hook(c->window, key_up, c);	
+    mlx_loop(c->mlx);
     return (0);
 }
 
 void	usage(void)
 {
 	ft_putstr("usage: ./fractol <FRACTAL #>\n");
-	ft_putstr("---------------\n   FRACTALS\n---------------\n");
+	ft_putstr("-----------------\n    FRACTALS\n-----------------\n");
 	ft_putstr("1: Mandelbrot\n");
-	ft_putstr("2: Julia\n");
-	ft_putstr("3: Burning Ship\n");
-	ft_putstr("4: Triforce\n");
+	ft_putstr("2: Burning Ship\n");
+	ft_putstr("3: Julia\n");
+	ft_putstr("4: Swir-lia\n");
 	exit(0);
 }
 

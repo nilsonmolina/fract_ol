@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/02 14:47:54 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 00:45:16 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void    *mandelbrot_set(void* param)
 				new_re = old_re * old_re - old_im * old_im + pr;
 				if (c->fractal == mandelbrot)
 					new_im = 2 * old_re * old_im + pi;
+				else if (c->fractal == burning_ship)
+					new_im = 2 * fabs(old_re * old_im) + pi;
 				if ((new_re * new_re + new_im * new_im) > 4)
 					break;
 				i++;
@@ -48,4 +50,47 @@ void    *mandelbrot_set(void* param)
 		y++;
 	}
 	return(NULL);
+}
+
+void*	julia_set(void *param)
+{
+	t_canvas *c = (t_canvas *)param;
+	double new_re;
+	double new_im;
+	double old_re;
+	double old_im;
+	int y = c->start;	
+	while (y < c->end)
+	{
+		int x = 0;
+		while (x < c->img.width)
+		{
+			new_re = 1.5 * (x - 400) / (0.5 * c->zoom * c->img.width) + c->offset_x;
+			new_im = (y - 300) / (0.5 * c->zoom * c->img.height) + c->offset_y;
+			int i = 0;
+			while (i < c->max_iter)
+			{
+				old_re = new_re;
+				old_im = new_im;
+				if (c->fractal == 4)
+				{
+					new_re = old_re * old_re - old_im * old_im + (-0.7 * 291 / 300);
+					new_im = 2 * old_re * old_im + (0.27015 * 400 / 300);
+				}
+				else if (c->fractal == julia)
+				{
+					new_re = old_re * old_re - old_im * old_im + (-0.7 * c->mouse_x / 300);
+					new_im = 2 * old_re * old_im + (0.27015 * c->mouse_y / 300);
+				}
+				if ((new_re * new_re + new_im * new_im) > 4)
+					break;
+				i++;
+			}
+			if (i < c->max_iter)
+				put_img_vector(c, x, y);
+			x++;
+		}
+		y++;
+	}
+	return (NULL);
 }

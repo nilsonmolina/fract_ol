@@ -57,6 +57,8 @@ typedef struct	s_canvas
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
+	double		mouse_x;
+	double		mouse_y;
 }				t_canvas;
 
 /*
@@ -77,13 +79,14 @@ int				mouse_click(int mouse, int x, int y, t_canvas *c);
 /*
 ** render.c
 */
-void			pthread(t_canvas *c);
+void			draw(t_canvas *c);
 void			put_img_vector(t_canvas *c, int x, int y);
 
 /*
 ** fractals.c
 */
 void			*mandelbrot_set(void* param);
+void			*julia_set(void* param);
 
 
 #endif
