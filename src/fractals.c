@@ -6,91 +6,91 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/15 12:08:27 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 15:52:49 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    *mandelbrot_set(void* param)
+void	*mandelbrot_set(void *param)
 {
-	t_canvas *c = (t_canvas *)param;
-	double pr, pi;
-	double new_re, new_im, old_re, old_im;
-	int y = c->start;
-	while (y < c->end)
+	t_canvas	*c;
+	t_vars		v;
+
+	c = (t_canvas *)param;
+	v.y = c->start;
+	while (v.y < c->end)
 	{
-		int x = 0;
-		while (x < c->img.width)
+		v.x = 0;
+		while (v.x < c->img.width)
 		{
-			pr = 1.5 *(x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
-			pi = (y - c->img.height / 2) / (0.25 * c->zoom * c->img.height) + c->offset_y;
-			new_re = 0;
-			new_im = 0;
-			old_re = 0;
-			old_im = 0;
-			int i = 0;
-			while (i < c->max_iter)
+			v.pr = 1.5 * (v.x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
+			v.pi = (v.y - c->img.height / 2) / (0.25 * c->zoom * c->img.height) + c->offset_y;
+			v.new_re = 0;
+			v.new_im = 0;
+			v.old_re = 0;
+			v.old_im = 0;
+			v.i = 0;
+			while (v.i < c->max_iter)
 			{
-				old_re = new_re;
-				old_im = new_im;
-				new_re = old_re * old_re - old_im * old_im + pr;
+				v.old_re = v.new_re;
+				v.old_im = v.new_im;
+				v.new_re = v.old_re * v.old_re - v.old_im * v.old_im + v.pr;
 				if (c->fractal == mandelbrot)
-					new_im = 2 * old_re * old_im + pi;
+					v.new_im = 2 * v.old_re * v.old_im + v.pi;
 				else if (c->fractal == burning_ship)
-					new_im = 2 * fabs(old_re * old_im) + pi;
-				if ((new_re * new_re + new_im * new_im) > 4)
-					break;
-				i++;
+					v.new_im = 2 * fabs(v.old_re * v.old_im) + v.pi;
+				if ((v.new_re * v.new_re + v.new_im * v.new_im) > 4)
+					break ;
+				v.i++;
 			}
-			if (i < c->max_iter)
-				put_img_vector(c, x, y, i);
-			x++;
+			if (v.i < c->max_iter)
+				put_img_vector(c, v.x, v.y, v.i);
+			v.x++;
 		}
-		y++;
+		v.y++;
 	}
-	return(NULL);
+	return (NULL);
 }
 
-void*	julia_set(void *param)
+void	*julia_set(void *param)
 {
-	t_canvas *c = (t_canvas *)param;
-	double new_re;
-	double new_im;
-	double old_re;
-	double old_im;
-	int y = c->start;	
-	while (y < c->end)
+	t_canvas	*c;
+	t_vars		v;
+
+	c = (t_canvas *)param;
+	v.y = c->start;
+	while (v.y < c->end)
 	{
-		int x = 0;
-		while (x < c->img.width)
+		v.x = 0;
+		while (v.x < c->img.width)
 		{
-			new_re = 1.5 * (x - 400) / (0.5 * c->zoom * c->img.width) + c->offset_x;
-			new_im = (y - 300) / (0.5 * c->zoom * c->img.height) + c->offset_y;
-			int i = 0;
-			while (i < c->max_iter)
+			v.new_re = 1.5 * (v.x - 400) / (0.5 * c->zoom * c->img.width) + c->offset_x;
+			v.new_im = (v.y - 300) / (0.5 * c->zoom * c->img.height) + c->offset_y;
+			v.i = 0;
+			while (v.i < c->max_iter)
 			{
-				old_re = new_re;
-				old_im = new_im;
+				v.old_re = v.new_re;
+				v.old_im = v.new_im;
 				if (c->fractal == swirlia)
 				{
-					new_re = old_re * old_re - old_im * old_im + (-0.7 * 291 / 300);
-					new_im = 2 * old_re * old_im + (0.27015 * 400 / 300);
+					v.new_re = v.old_re * v.old_re - v.old_im * v.old_im + (-0.7 * 291 / 300);
+					v.new_im = 2 * v.old_re * v.old_im + (0.27015 * 400 / 300);
 				}
 				else if (c->fractal == julia)
 				{
-					new_re = old_re * old_re - old_im * old_im + (-0.7 * c->mouse_x / 300);
-					new_im = 2 * old_re * old_im + (0.27015 * c->mouse_y / 300);
+					v.new_re = v.old_re * v.old_re - v.old_im * v.old_im + (-0.7 * c->mouse_x / 300);
+					v.new_im = 2 * v.old_re * v.old_im + (0.27015 * c->mouse_y / 300);
 				}
-				if ((new_re * new_re + new_im * new_im) > 4)
-					break;
-				i++;
+				if ((v.new_re * v.new_re + v.new_im * v.new_im) > 4)
+					break ;
+				v.i++;
 			}
-			if (i < c->max_iter)
-				put_img_vector(c, x, y, i);
-			x++;
+			if (v.i < c->max_iter)
+				put_img_vector(c, v.x, v.y, v.i);
+			v.x++;
 		}
-		y++;
+		v.y++;
 	}
 	return (NULL);
 }

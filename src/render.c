@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/15 12:26:06 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 15:52:47 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	put_img_vector(t_canvas *c, int x, int y, int color)
 {
 	int	i;
 
-    if (x > c->img.width - 1 || x < 1)
-        return ;
-    i = (x) + ((y) * c->img.width);
-    if (i >= (c->img.width * c->img.height) || i < 0)
-        return ;
-    c->img.data[i] = color * (256 + c->color);
+	if (x > c->img.width - 1 || x < 1)
+		return ;
+	i = (x) + ((y) * c->img.width);
+	if (i >= (c->img.width * c->img.height) || i < 0)
+		return ;
+	c->img.data[i] = color * (256 + c->color);
 }

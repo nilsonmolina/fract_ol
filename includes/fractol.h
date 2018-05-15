@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
+/*   Updated: 2018/05/15 15:53:50 by nmolina          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -25,6 +37,19 @@
 /*
 ** ------ STRUCTS ------
 */
+typedef struct	s_vars
+{
+	double		pr;
+	double		pi;
+	double		new_re;
+	double		new_im;
+	double		old_re;
+	double		old_im;
+	int			x;
+	int			y;
+	int			i;
+}				t_vars;
+
 typedef enum	e_fractal
 {
 	mandelbrot = 1,
@@ -87,7 +112,7 @@ void			put_img_vector(t_canvas *c, int x, int y, int color);
 ** mutate.c
 */
 void			switch_fractal(t_canvas *c, t_fractal f);
-void			zoom(t_canvas *c,int direction, double value);
+void			zoom(t_canvas *c, double value, int x, int y);
 void			move(t_canvas *c, double *direction, double value);
 void			change_iter(t_canvas *c, int value);
 void			change_color(t_canvas *c);
@@ -95,8 +120,7 @@ void			change_color(t_canvas *c);
 /*
 ** fractals.c
 */
-void			*mandelbrot_set(void* param);
-void			*julia_set(void* param);
-
+void			*mandelbrot_set(void *param);
+void			*julia_set(void *param);
 
 #endif
