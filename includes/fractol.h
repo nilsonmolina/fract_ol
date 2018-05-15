@@ -81,7 +81,7 @@ int				mouse_click(int mouse, int x, int y, t_canvas *c);
 ** render.c
 */
 void			draw(t_canvas *c);
-void			put_img_vector(t_canvas *c, int x, int y);
+void			put_img_vector(t_canvas *c, int x, int y, int color);
 
 /*
 ** mutate.c
@@ -90,8 +90,7 @@ void			switch_fractal(t_canvas *c, t_fractal f);
 void			zoom(t_canvas *c,int direction, double value);
 void			move(t_canvas *c, double *direction, double value);
 void			change_iter(t_canvas *c, int value);
-
-
+void			change_color(t_canvas *c);
 
 /*
 ** fractals.c

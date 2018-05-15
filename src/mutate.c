@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:47:44 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/15 11:17:37 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 13:26:27 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ void	switch_fractal(t_canvas *c, t_fractal f)
 void    zoom(t_canvas *c,int direction, double value)
 {
     if (direction > 0)
+    {
         c->zoom *= value;
-    else if ((c->zoom / value) > 0.0125)
+        c->zoom < 180 ? c->max_iter++ : 0;
+    }
+    else if ((c->zoom / value) > 0.00125)
+    {
         c->zoom /= value;
+        c->max_iter > 50 ? c->max_iter-- : 0;        
+    }
     else
         return ;
     draw(c);
@@ -47,5 +53,14 @@ void    move(t_canvas *c, double *direction, double value)
 void    change_iter(t_canvas *c, int value)
 {
     c->max_iter + value > 50 ? c->max_iter += value : 0;
+    draw(c);
+}
+
+void    change_color(t_canvas *c)
+{
+    if (c->color < 20)
+        c->color += 3;
+    else
+        c->color = 1;
     draw(c);
 }

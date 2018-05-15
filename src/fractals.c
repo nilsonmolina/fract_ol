@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 15:31:30 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:08:27 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void    *mandelbrot_set(void* param)
 				i++;
 			}
 			if (i < c->max_iter)
-				put_img_vector(c, x, y);
+				put_img_vector(c, x, y, i);
 			x++;
 		}
 		y++;
@@ -87,7 +87,7 @@ void*	julia_set(void *param)
 				i++;
 			}
 			if (i < c->max_iter)
-				put_img_vector(c, x, y);
+				put_img_vector(c, x, y, i);
 			x++;
 		}
 		y++;

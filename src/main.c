@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 16:58:52 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:19:49 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_canvas    *init(t_fractal f)
 	c->offset_y = 0;
 	c->mouse_x = 0;
 	c->mouse_y = 0;
-	c->color = 0xFFFFFF;
+	c->color = 1;
     return (c);
 }
 

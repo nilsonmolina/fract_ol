@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/15 08:09:02 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:26:06 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw(t_canvas *c)
 	mlx_put_image_to_window(c->mlx, c->window, c->img.ptr, 0, 0);
 }
 
-void	put_img_vector(t_canvas *c, int x, int y)
+void	put_img_vector(t_canvas *c, int x, int y, int color)
 {
 	int	i;
 
@@ -54,5 +54,5 @@ void	put_img_vector(t_canvas *c, int x, int y)
     i = (x) + ((y) * c->img.width);
     if (i >= (c->img.width * c->img.height) || i < 0)
         return ;
-    c->img.data[i] = c->color;
+    c->img.data[i] = color * (256 + c->color);
 }
