@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 14:54:49 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 17:27:43 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@ int		key_hold(int key, t_canvas *c)
 		mlx_destroy_window(c->mlx, c->window);
 		exit(0);
 	}
-    key == 6 ? c->zoom *= 1.25 : 0;
-	key == 7 && (c->zoom / 1.25 > 0) ? c->zoom /= 1.25 : 0;
-	key == 123 ? c->offset_x += 0.3/c->zoom : 0;
-	key == 124 ? c->offset_x -= 0.3/c->zoom : 0;
-	key == 125 ? c->offset_y -= 0.3/c->zoom : 0;
-	key == 126 ? c->offset_y += 0.3/c->zoom : 0;
-    if (key == 6 || key == 7 || (123 <= key && key <= 126))
-    {
-        draw(c);        
-        // printf("zoom: %f | offset_x: %f | offset_y: %f\n", c->zoom, c->offset_x, c->offset_y);        
-    }
+    key == 6 ? zoom(c, 1, 1.25) : 0;
+	key == 7 ? zoom(c, 0, 1.25) : 0;
+	key == 123 ? move(c, &c->offset_x, 0.3) : 0;
+	key == 124 ? move(c, &c->offset_x, -0.3): 0;
+	key == 125 ? move(c, &c->offset_y, -0.3) : 0;
+	key == 126 ? move(c, &c->offset_y, 0.3) : 0;
+	key == 257 ? c->shft = 1 : 0;
 	return (0);
 }
 
-// int		key_up(int key, t_canvas *c)
-// {
-//     if (c != NULL)
-//         printf("KEY_UP - key: %d\n", key);
-// 	return (0);
-// }
+int		key_up(int key, t_canvas *c)
+{
+	key == 18 ? switch_fractal(c, 1) : 0;
+	key == 19 ? switch_fractal(c, 2) : 0;
+	key == 20 ? switch_fractal(c, 3) : 0;
+	key == 21 ? switch_fractal(c, 4) : 0;
+	key == 49 ? switch_fractal(c, c->fractal) : 0;
+	key == 257 ? c->shft = 0 : 0;
+	return (0);
+}
 
 int		mouse_motion(int x, int y, t_canvas *c)
 {
@@ -60,9 +60,9 @@ int		mouse_click(int mouse, int x, int y, t_canvas *c)
 {
     if (c != NULL)
         printf("MOUSE_CLICK - mouse: %d | x: %d | y: %d\n", mouse, x, y);
-	mouse == 4 ? c->zoom *= 1.25 : 0;
-	mouse == 5 && (c->zoom / 1.25 > 0.125) ? c->zoom /= 1.25 : 0;
-	draw(c);	
-	
+	mouse == 4 ? zoom(c, 1, 1.25) : 0;
+	mouse == 5 ? zoom(c, 0, 1.25) : 0;
+	mouse == 4 && c->shft ? zoom(c, 1, 1.5) : 0;
+	mouse == 5 && c->shft ? zoom(c, 0, 1.5) : 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 00:46:38 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:58:52 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int     main(int argc, char **argv)
 	mlx_hook(c->window, 2, 0, key_hold, c);
 	mlx_hook(c->window, 6, 0, mouse_motion, c);
 	mlx_mouse_hook(c->window, mouse_click, c);
-    // mlx_key_hook(c->window, key_up, c);	
+    mlx_key_hook(c->window, key_up, c);	
     mlx_loop(c->mlx);
     return (0);
 }
@@ -65,7 +65,7 @@ void	usage(void)
 	ft_putstr("1: Mandelbrot\n");
 	ft_putstr("2: Burning Ship\n");
 	ft_putstr("3: Julia\n");
-	ft_putstr("4: Swir-lia\n");
+	ft_putstr("4: Swirlia\n");
 	exit(0);
 }
 

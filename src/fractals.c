@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 00:45:16 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 15:31:30 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void*	julia_set(void *param)
 			{
 				old_re = new_re;
 				old_im = new_im;
-				if (c->fractal == 4)
+				if (c->fractal == swirlia)
 				{
 					new_re = old_re * old_re - old_im * old_im + (-0.7 * 291 / 300);
 					new_im = 2 * old_re * old_im + (0.27015 * 400 / 300);

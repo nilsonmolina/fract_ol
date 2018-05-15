@@ -28,9 +28,9 @@
 typedef enum	e_fractal
 {
 	mandelbrot = 1,
-	julia,
 	burning_ship,
-	triforce
+	julia,
+	swirlia
 }				t_fractal;
 
 typedef struct	s_img
@@ -53,7 +53,8 @@ typedef struct	s_canvas
 	int			start;
 	int			end;
 	int			color;
-	int			max_iter;	
+	int			max_iter;
+	int			shft;
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
@@ -81,6 +82,14 @@ int				mouse_click(int mouse, int x, int y, t_canvas *c);
 */
 void			draw(t_canvas *c);
 void			put_img_vector(t_canvas *c, int x, int y);
+
+/*
+** mutate.c
+*/
+void			switch_fractal(t_canvas *c, t_fractal f);
+void			zoom(t_canvas *c,int direction, double value);
+void			move(t_canvas *c, double *direction, double value);
+
 
 /*
 ** fractals.c

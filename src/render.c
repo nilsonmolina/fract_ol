@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 00:08:57 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:54:43 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	draw(t_canvas *c)
 	{
 		if (c->fractal == mandelbrot)
 			pthread_create(&t_arr[i], NULL, mandelbrot_set, &c_arr[i]);
-		else if (c->fractal == julia)
-			pthread_create(&t_arr[i], NULL, julia_set, &c_arr[i]);
 		else if (c->fractal == burning_ship)
 			pthread_create(&t_arr[i], NULL, mandelbrot_set, &c_arr[i]);
-		else if (c->fractal == triforce)
+		else if (c->fractal == julia)
+			pthread_create(&t_arr[i], NULL, julia_set, &c_arr[i]);
+		else if (c->fractal == swirlia)
 			pthread_create(&t_arr[i], NULL, julia_set, &c_arr[i]);
 	}
 	while (--i >= 0)
