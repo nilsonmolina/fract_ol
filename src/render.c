@@ -6,11 +6,23 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/14 16:54:43 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/15 08:09:02 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	create_fractal_thread(t_canvas *c, pthread_t *t)
+{
+	if (c->fractal == mandelbrot)
+		pthread_create(t, NULL, mandelbrot_set, c);
+	else if (c->fractal == burning_ship)
+		pthread_create(t, NULL, mandelbrot_set, c);
+	else if (c->fractal == julia)
+		pthread_create(t, NULL, julia_set, c);
+	else if (c->fractal == swirlia)
+		pthread_create(t, NULL, julia_set, c);
+}
 
 void	draw(t_canvas *c)
 {
@@ -27,16 +39,7 @@ void	draw(t_canvas *c)
 	}
 	i = -1;
 	while (++i < THREADS)
-	{
-		if (c->fractal == mandelbrot)
-			pthread_create(&t_arr[i], NULL, mandelbrot_set, &c_arr[i]);
-		else if (c->fractal == burning_ship)
-			pthread_create(&t_arr[i], NULL, mandelbrot_set, &c_arr[i]);
-		else if (c->fractal == julia)
-			pthread_create(&t_arr[i], NULL, julia_set, &c_arr[i]);
-		else if (c->fractal == swirlia)
-			pthread_create(&t_arr[i], NULL, julia_set, &c_arr[i]);
-	}
+		create_fractal_thread(&c_arr[i], &t_arr[i]);
 	while (--i >= 0)
 		pthread_join(t_arr[i], NULL);
 	mlx_put_image_to_window(c->mlx, c->window, c->img.ptr, 0, 0);

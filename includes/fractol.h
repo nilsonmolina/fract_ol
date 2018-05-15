@@ -89,6 +89,8 @@ void			put_img_vector(t_canvas *c, int x, int y);
 void			switch_fractal(t_canvas *c, t_fractal f);
 void			zoom(t_canvas *c,int direction, double value);
 void			move(t_canvas *c, double *direction, double value);
+void			change_iter(t_canvas *c, int value);
+
 
 
 /*
