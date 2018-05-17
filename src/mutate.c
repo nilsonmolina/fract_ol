@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:47:44 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/16 01:24:50 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:43:32 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,16 @@
 void	zoom(t_canvas *c, double value, int x, int y)
 {
 	if (value > 0)
-	{
 		c->zoom *= value;
-		if (x > 0 && y > 0)
-		{
-			c->offset_x += (x - c->img.width / 2) * (0.3 / c->zoom);
-			c->offset_y += (y - c->img.height / 2) * (0.3 / c->zoom);
-		}
-	}
 	else if ((c->zoom / -value) > 0.00125)
-	{
 		c->zoom /= -value;
-	}
 	else
 		return ;
+	if (x > 0 && y > 0)
+	{
+		c->offset_x += ((x - c->img.width / 2) * 0.00125) / c->zoom;
+		c->offset_y += ((y - c->img.height / 2) * 0.00125) / c->zoom;
+	} 
 	draw(c);
 }
 

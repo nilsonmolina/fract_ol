@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/15 23:53:32 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 14:00:01 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@
 # define ROT_DEGREES	5
 # define MV_PIXELS		5
 # define WH				0xFFFFFF
-# define GREY			0xAAAAAA
-# define VARS double pr, pi, new_re, new_im, old_re, old_im; int x, y, i;
+# define VARS double pr, pi, n_re, n_im, o_re, o_im; int x, y, i;
 
 /*
 ** ------ STRUCTS ------
@@ -43,10 +42,10 @@ typedef struct	s_vars
 {
 	double		pr;
 	double		pi;
-	double		new_re;
-	double		new_im;
-	double		old_re;
-	double		old_im;
+	double		n_re;
+	double		n_im;
+	double		o_re;
+	double		o_im;
 	int			x;
 	int			y;
 	int			i;
@@ -71,19 +70,18 @@ typedef struct	s_img
 	int			height;
 }				t_img;
 
-typedef struct	s_canvas
+typedef struct s_canvas
 {
 	void		*mlx;
 	void		*window;
 	t_img		img;
 	t_fractal	fractal;
-	t_vars		v;
 	int			start;
 	int			end;
 	int			color;
 	int			max_iter;
 	int			shft;
-	int			threads;
+	int			thr_c;
 	double		zoom;
 	double		offset_x;
 	double		offset_y;

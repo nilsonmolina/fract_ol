@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/16 01:21:13 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/16 19:20:09 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		key_hold(int key, t_canvas *c)
 		mlx_destroy_window(c->mlx, c->window);
 		exit(0);
 	}
-	key == 8 ? change_color(c) : 0;	
+	key == 8 ? change_color(c) : 0;
 	key == 6 ? zoom(c, 1.25, -1, -1) : 0;
 	key == 7 ? zoom(c, -1.25, -1, -1) : 0;
 	key == 12 ? change_iter(c, -1) : 0;
@@ -63,9 +63,7 @@ int		mouse_motion(int x, int y, t_canvas *c)
 
 int		mouse_click(int mouse, int x, int y, t_canvas *c)
 {
-	mouse == 4 && !c->shft ? zoom(c, 1.25, -1, -1) : 0;
-	mouse == 5 && !c->shft ? zoom(c, -1.25, -1, -1) : 0;
-	mouse == 4 && c->shft ? zoom(c, 1.25, x, y) : 0;
-	mouse == 5 && c->shft ? zoom(c, -1.25, x, y) : 0;
+	mouse == 4 ? zoom(c, 1.25, x, y) : 0;
+	mouse == 5 ? zoom(c, -1.25, x, y) : 0;
 	return (0);
 }

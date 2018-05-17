@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/16 01:22:49 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/16 19:12:55 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_canvas	*init(t_fractal f)
 	c->img.data = (int *)mlx_get_data_addr(c->img.ptr,
 			&c->img.bpp, &c->img.sl, &c->img.e);
 	c->fractal = f;
-	c->threads = 1;
+	c->thr_c = 1;
 	c->shft = 0;
 	c->start = 0;
 	c->end = 0;

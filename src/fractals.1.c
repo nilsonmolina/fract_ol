@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractals3.c                                        :+:      :+:    :+:   */
+/*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/16 18:31:21 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:54:53 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@ void    *mandelbrot_set(void* param)
 {
 	t_canvas *c = (t_canvas *)param;
     VARS;
-
+	
 	y = c->start;
 	while (y < c->end)
 	{
 		x = 0;
 		while (x < c->img.width)
 		{
-			pr = 1.5 *(x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
+			pr = 1.5 * (x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
 			pi = (y - c->img.height / 2) / (0.25 * c->zoom * c->img.height) + c->offset_y;
-			new_re = 0;
-			new_im = 0;
-			old_re = 0;
-			old_im = 0;
+			n_re = 0;
+			n_im = 0;
+			o_re = 0;
+			o_im = 0;
 			i = 0;
 			while (i < c->max_iter)
 			{
-				old_re = new_re;
-				old_im = new_im;
-				new_re = old_re * old_re - old_im * old_im + pr;
+				o_re = n_re;
+				o_im = n_im;
+				n_re = o_re * o_re - o_im * o_im + pr;
 				if (c->fractal == mandelbrot)
-					new_im = 2 * old_re * old_im + pi;
+					n_im = 2 * o_re * o_im + pi;
 				else if (c->fractal == burning_ship)
-					new_im = 2 * fabs(old_re * old_im) + pi;
-				if ((new_re * new_re + new_im * new_im) > 4)
+					n_im = 2 * fabs(o_re * o_im) + pi;
+				if ((n_re * n_re + n_im * n_im) > 4)
 					break;
 				i++;
 			}
@@ -65,24 +65,24 @@ void*	julia_set(void *param)
 		x = 0;
 		while (x < c->img.width)
 		{
-			new_re = 1.5 * (x - 400) / (0.5 * c->zoom * c->img.width) + c->offset_x;
-			new_im = (y - 300) / (0.5 * c->zoom * c->img.height) + c->offset_y;
+			n_re = 1.5 * (x - 400) / (0.5 * c->zoom * c->img.width) + c->offset_x;
+			n_im = (y - 300) / (0.5 * c->zoom * c->img.height) + c->offset_y;
 			i = 0;
 			while (i < c->max_iter)
 			{
-				old_re = new_re;
-				old_im = new_im;
+				o_re = n_re;
+				o_im = n_im;
 				if (c->fractal == swirlia)
 				{
-					new_re = old_re * old_re - old_im * old_im + (-0.7 * 291 / 300);
-					new_im = 2 * old_re * old_im + (0.27015 * 400 / 300);
+					n_re = o_re * o_re - o_im * o_im + (-0.7 * 291 / 300);
+					n_im = 2 * o_re * o_im + (0.27015 * 400 / 300);
 				}
 				else if (c->fractal == julia)
 				{
-					new_re = old_re * old_re - old_im * old_im + (-0.7 * c->mouse_x / 300);
-					new_im = 2 * old_re * old_im + (0.27015 * c->mouse_y / 300);
+					n_re = o_re * o_re - o_im * o_im + (-0.7 * c->mouse_x / 300);
+					n_im = 2 * o_re * o_im + (0.27015 * c->mouse_y / 300);
 				}
-				if ((new_re * new_re + new_im * new_im) > 4)
+				if ((n_re * n_re + n_im * n_im) > 4)
 					break;
 				i++;
 			}
