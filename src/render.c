@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 15:02:51 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 17:10:12 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,11 @@ void	put_strings(void *mlx, void *w, t_canvas *c)
 	mlx_string_put(mlx, w, 15, 50, WH, "Iters:");
 	mlx_string_put(mlx, w, 100, 50, WH, str = ft_itoa(c->max_iter));
 	free(str);
-	mlx_string_put(mlx, w, 15, 70, WH, "Zoom:");
-	mlx_string_put(mlx, w, 100, 70, WH, str = ft_itoa((int)c->zoom));
+	mlx_string_put(mlx, w, 15, 70, WH, "Threads:");
+	mlx_string_put(mlx, w, 100, 70, WH, str = ft_itoa(c->thr_c));
 	free(str);
-	mlx_string_put(mlx, w, 15, 90, WH, "Threads:");
-	mlx_string_put(mlx, w, 100, 90, WH, str = ft_itoa(c->thr_c));
-	free(str);
-	mlx_string_put(mlx, w, 15, 110, WH, "Color:");
-	mlx_string_put(mlx, w, 100, 110, WH, str = ft_itoa(c->color));
+	mlx_string_put(mlx, w, 15, 90, WH, "Color:");
+	mlx_string_put(mlx, w, 100, 90, WH, str = ft_itoa(c->color));
 	free(str);
 }
 

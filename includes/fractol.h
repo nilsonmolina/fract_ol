@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 14:00:01 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 15:57:36 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_canvas
 	void		*window;
 	t_img		img;
 	t_fractal	fractal;
+	t_vars		v;
 	int			start;
 	int			end;
 	int			color;

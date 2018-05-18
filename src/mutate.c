@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:47:44 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 13:43:32 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 17:11:33 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	zoom(t_canvas *c, double value, int x, int y)
 	{
 		c->offset_x += ((x - c->img.width / 2) * 0.00125) / c->zoom;
 		c->offset_y += ((y - c->img.height / 2) * 0.00125) / c->zoom;
-	} 
+	}
 	draw(c);
 }
 
@@ -44,7 +44,9 @@ void	change_color(t_canvas *c)
 {
 	if (c->color < 0)
 		c->color = 10;
-	else
+	else if (c->color < 1000)
 		c->color *= 1.1;
+	else
+		c->color *= 1.05;
 	draw(c);
 }

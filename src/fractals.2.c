@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 16:56:53 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/17 15:59:23 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,41 @@
 void    *mandelbrot_set(void* param)
 {
 	t_canvas	*c;
-	VARS;
+    t_vars		*v;
 
 	c = (t_canvas *)param;
-	y = c->start;
-	while (y < c->end)
+	v = (t_vars *)malloc(sizeof(t_vars));
+	v->y = c->start;
+	while (v->y < c->end)
 	{
-		x = 0;
-		while (x < c->img.width)
+		v->x = 0;
+		while (v->x < c->img.width)
 		{
-			pr = 1.5 * (x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
-			pi = (y - c->img.height / 2) / (0.25 * c->zoom * c->img.height) + c->offset_y;
-			n_re = 0;
-			n_im = 0;
-			o_re = 0;
-			o_im = 0;
-			i = 0;
-			while (i < c->max_iter)
+			v->pr = 1.5 * (v->x - c->img.width / 2) / (0.25 * c->zoom * c->img.width) + c->offset_x;
+			v->pi = (v->y - c->img.height / 2) / (0.25 * c->zoom * c->img.height) + c->offset_y;
+			v->n_re = 0;
+			v->n_im = 0;
+			v->o_re = 0;
+			v->o_im = 0;
+			v->i = 0;
+			while (v->i < c->max_iter)
 			{
-				o_re = n_re;
-				o_im = n_im;
-				n_re = o_re * o_re - o_im * o_im + pr;
+				v->o_re = v->n_re;
+				v->o_im = v->n_im;
+				v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + v->pr;
 				if (c->fractal == mandelbrot)
-					n_im = 2 * o_re * o_im + pi;
+					v->n_im = 2 * v->o_re * v->o_im + v->pi;
 				else if (c->fractal == burning_ship)
-					n_im = 2 * fabs(o_re * o_im) + pi;
-				if ((n_re * n_re + n_im * n_im) > 4)
+					v->n_im = 2 * fabs(v->o_re * v->o_im) + v->pi;
+				if ((v->n_re * v->n_re + v->n_im * v->n_im) > 4)
 					break;
-				i++;
+				v->i++;
 			}
-			if (i < c->max_iter)
-				put_img_vector(c, x, y, i);
-			x++;
+			if (v->i < c->max_iter)
+				put_img_vector(c, v->x, v->y, v->i);
+			v->x++;
 		}
-		y++;
+		v->y++;
 	}
 	return(NULL);
 }
