@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 15:53:46 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 12:17:12 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_canvas	*init(t_fractal f)
 	c->mouse_x = 0;
 	c->mouse_y = 0;
 	c->color = 10;
+	c->menu = 1;
 	return (c);
 }
 
@@ -48,7 +49,7 @@ int			main(int argc, char **argv)
 	if (argc != 2 || argv[1][1] != '\0')
 		usage();
 	f = argv[1][0] - '0';
-	if (!(1 <= f && f <= 4))
+	if (!(1 <= f && f <= 5))
 		usage();
 	c = init(f);
 	draw(c);
@@ -79,5 +80,22 @@ void		check_error(int err, char *msg)
 		ft_putstr(msg);
 		ft_putstr("\n");
 		exit(1);
+	}
+}
+
+void	switch_fractal(t_canvas *c, t_fractal f)
+{
+	if (c->zoom != 1 || c->max_iter != 50 ||
+		c->offset_x != 0 || c->offset_y != 0 ||
+		c->fractal != f || c->color != 1)
+	{
+		c->zoom = 1;
+		c->max_iter = 50;
+		c->offset_x = 0;
+		c->offset_y = 0;
+		c->color = 10;
+		c->menu = 1;
+		c->fractal = f;
+		draw(c);
 	}
 }

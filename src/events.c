@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/16 19:20:09 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 14:46:54 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		key_up(int key, t_canvas *c)
 	key == 19 ? switch_fractal(c, 2) : 0;
 	key == 20 ? switch_fractal(c, 3) : 0;
 	key == 21 ? switch_fractal(c, 4) : 0;
+	key == 23 ? switch_fractal(c, 5) : 0;
+	key == 46 ? toggle_menu(c) : 0;
 	key == 49 ? switch_fractal(c, c->fractal) : 0;
 	key == 257 ? c->shft = 0 : 0;
 	return (0);
@@ -66,4 +68,12 @@ int		mouse_click(int mouse, int x, int y, t_canvas *c)
 	mouse == 4 ? zoom(c, 1.25, x, y) : 0;
 	mouse == 5 ? zoom(c, -1.25, x, y) : 0;
 	return (0);
+}
+
+void	toggle_menu(t_canvas *c)
+{
+	if (c->menu > 1)
+		c->menu = -1;
+	c->menu++;
+	draw(c);
 }

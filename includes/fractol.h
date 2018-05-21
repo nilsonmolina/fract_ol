@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 15:57:36 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 15:08:13 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define ROT_DEGREES	5
 # define MV_PIXELS		5
 # define WH				0xFFFFFF
-# define VARS double pr, pi, n_re, n_im, o_re, o_im; int x, y, i;
+# define INIT t_canvas *c = (t_canvas *)param; t_vars *v = malloc(sizeof(t_vars));
 
 /*
 ** ------ STRUCTS ------
@@ -47,7 +47,6 @@ typedef struct	s_vars
 	double		o_re;
 	double		o_im;
 	int			x;
-	int			y;
 	int			i;
 }				t_vars;
 
@@ -56,7 +55,8 @@ typedef enum	e_fractal
 	mandelbrot = 1,
 	burning_ship,
 	julia,
-	swirlia
+	swirlia,
+	conan
 }				t_fractal;
 
 typedef struct	s_img
@@ -76,13 +76,14 @@ typedef struct s_canvas
 	void		*window;
 	t_img		img;
 	t_fractal	fractal;
-	t_vars		v;
+	t_vars		*v;
 	int			start;
 	int			end;
 	int			color;
 	int			max_iter;
 	int			shft;
 	int			thr_c;
+	int			menu;
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
@@ -104,13 +105,13 @@ int				key_up(int key, t_canvas *c);
 int				key_hold(int key, t_canvas *c);
 int				mouse_motion(int x, int y, t_canvas *c);
 int				mouse_click(int mouse, int x, int y, t_canvas *c);
+void			toggle_menu(t_canvas *c);
 
 /*
 ** render.c
 */
 void			draw(t_canvas *c);
 void			put_img_vector(t_canvas *c, int x, int y, int color);
-void			change_threads(t_canvas *c);
 
 /*
 ** mutate.c
@@ -119,6 +120,7 @@ void			zoom(t_canvas *c, double value, int x, int y);
 void			move(t_canvas *c, double *direction, double value);
 void			change_iter(t_canvas *c, int value);
 void			change_color(t_canvas *c);
+void			change_threads(t_canvas *c);
 
 /*
 ** fractals.c

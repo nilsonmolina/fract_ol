@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:12 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 16:56:53 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 14:50:39 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,4 @@ void*	julia_set(void *param)
 		y++;
 	}
 	return (NULL);
-}
-
-void	switch_fractal(t_canvas *c, t_fractal f)
-{
-	if (c->zoom != 1 || c->max_iter != 50 ||
-		c->offset_x != 0 || c->offset_y != 0 ||
-		c->fractal != f || c->color != 1)
-	{
-		c->zoom = 1;
-		c->max_iter = 50;
-		c->offset_x = 0;
-		c->offset_y = 0;
-		c->color = 10;
-		c->fractal = f;
-		draw(c);
-	}
 }

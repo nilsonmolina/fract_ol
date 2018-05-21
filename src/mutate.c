@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:47:44 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/17 17:11:33 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 04:36:38 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	move(t_canvas *c, double *direction, double value)
 void	change_iter(t_canvas *c, int value)
 {
 	c->max_iter + value > 50 ? c->max_iter += value : 0;
+	draw(c);
+}
+
+void	change_threads(t_canvas *c)
+{
+	c->thr_c >= 16 ? c->thr_c = 1 : (c->thr_c *= 2);
 	draw(c);
 }
 

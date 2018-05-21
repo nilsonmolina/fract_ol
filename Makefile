@@ -1,7 +1,7 @@
 NAME = fractol
 
 # file names
-SRC = main.c events.c fractals.c render.c mutate.c
+SRC = main.c events.c render.c mutate.c julia_set.c mandelbrot_set.c
 OBJ = $(SRC:.c=.o)
 
 # directories
