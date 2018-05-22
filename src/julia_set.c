@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:44:25 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 18:23:38 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 18:44:26 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ void	set_new(t_canvas *c, t_vars *v)
 	else if (c->fractal == julia)
 	{
 		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im +
-			(-0.7 * c->mouse_x / 300) /
-			(v->o_re * v->o_re - v->o_im * v->o_im);
+			(-0.7 * c->mouse_x / 300);
 		v->n_im = 2 * v->o_re * v->o_im +
-			(0.27015 * c->mouse_y / 300) / (v->o_re * v->o_im);
+			(0.27015 * c->mouse_y / 300);
 	}
 	else if (c->fractal == conan)
 	{
 		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im +
-			(-0.7 * c->mouse_x / 300);
-		v->n_im = 2 * v->o_re * v->o_im + (0.27015 * c->mouse_y / 300);
+			(-0.7 * c->mouse_x / 300) /
+			(v->o_re * v->o_re - v->o_im * v->o_im);
+		v->n_im = 2 * v->o_re * v->o_im + 0.27015 /
+			(v->o_re * v->o_im);
 	}
 }
 

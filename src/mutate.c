@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:47:44 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 18:17:17 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 18:59:58 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	change_threads(t_canvas *c)
 
 void	change_color(t_canvas *c)
 {
-	if (c->color < 0)
-		c->color = 10;
-	else if (c->color < 1000)
+	if (c->color < 0 || c->color > 2000000000)
+		c->color = 1000;
+	else if (c->color < 100000)
 		c->color *= 1.1;
 	else
 		c->color *= 1.05;

@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 18:17:27 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 19:57:44 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,16 @@ void	put_strings(void *mlx, void *w, t_canvas *c)
 
 	f = c->fractal;
 	mlx_string_put(mlx, w, 10, 0, WH, "--------------");
-	f == mandelbrot ? mlx_string_put(mlx, w, 20, 15, WH, "Mandelbrot") : 0;
-	f == burning_ship ? mlx_string_put(mlx, w, 20, 15, WH, "Burning Ship") : 0;
-	f == julia ? mlx_string_put(mlx, w, 20, 15, WH, "Julia") : 0;
-	f == swirlia ? mlx_string_put(mlx, w, 20, 15, WH, "Swirlia") : 0;
-	f == conan ? mlx_string_put(mlx, w, 20, 15, WH, "Conan") : 0;
+	if (f == mandelbrot)
+		mlx_string_put(mlx, w, 20, 15, WH, "Mandelbrot");
+	else if (f == burning_ship)
+		mlx_string_put(mlx, w, 20, 15, WH, "Burning Ship");
+	else if (f == julia)
+		mlx_string_put(mlx, w, 20, 15, WH, "Julia");
+	else if (f == swirlia)
+		mlx_string_put(mlx, w, 20, 15, WH, "Swirlia");
+	else if (f == conan)
+		mlx_string_put(mlx, w, 20, 15, WH, "Conan");
 	mlx_string_put(mlx, w, 10, 30, WH, "--------------");
 	mlx_string_put(mlx, w, 15, 50, WH, "Iters:");
 	mlx_string_put(mlx, w, 100, 50, WH, str = ft_itoa(c->max_iter));
@@ -79,7 +84,6 @@ void	draw(t_canvas *c)
 	t_canvas	c_arr[c->thr_c];
 	int			i;
 
-	mlx_clear_window(c->mlx, c->window);
 	ft_bzero(c->img.data, sizeof(int) * c->img.width * c->img.height);
 	i = -1;
 	while (++i < c->thr_c && (ft_memcpy((void*)&c_arr[i], c, sizeof(t_canvas))))
