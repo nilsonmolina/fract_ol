@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 14:57:35 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 18:17:27 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	put_controls(void *mlx, void *w)
 	mlx_string_put(mlx, w, 30, 450, WH, "[M]");
 	mlx_string_put(mlx, w, 15, 470, WH, "Reset");
 	mlx_string_put(mlx, w, 30, 490, WH, "[SPACE]");
-	
 }
 
 void	put_strings(void *mlx, void *w, t_canvas *c)
@@ -69,9 +68,6 @@ void	put_strings(void *mlx, void *w, t_canvas *c)
 	free(str);
 	mlx_string_put(mlx, w, 15, 70, WH, "Threads:");
 	mlx_string_put(mlx, w, 100, 70, WH, str = ft_itoa(c->thr_c));
-	free(str);
-	mlx_string_put(mlx, w, 15, 90, WH, "Color:");
-	mlx_string_put(mlx, w, 100, 90, WH, str = ft_itoa(c->color));
 	free(str);
 	if (c->menu > 1)
 		put_controls(mlx, w);

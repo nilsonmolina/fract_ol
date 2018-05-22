@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 14:41:58 by nmolina           #+#    #+#             */
-/*   Updated: 2018/04/02 15:30:17 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 18:18:36 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ char			*ft_str_capitalizer(char *str);
 int				ft_wordcount(char *str, char delimiter);
 int				ft_firstoccurrence(char *str, char c);
 
-// New Functions
-int     ft_atoi_base(const char *str, int base);
+/*
+** ------ NEW FUNCTIONS ------
+*/
+int				ft_atoi_base(const char *str, int base);
 
 #endif

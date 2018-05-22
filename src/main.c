@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 12:17:12 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 17:27:16 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		check_error(int err, char *msg)
 	}
 }
 
-void	switch_fractal(t_canvas *c, t_fractal f)
+void		switch_fractal(t_canvas *c, t_fractal f)
 {
 	if (c->zoom != 1 || c->max_iter != 50 ||
 		c->offset_x != 0 || c->offset_y != 0 ||

@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 15:08:13 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/21 18:14:17 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <math.h>
 # include <pthread.h>
 
-# include <stdio.h> // remove this before turning in
-
 /*
 ** ------ VARIABLES ------
 */
@@ -33,7 +31,6 @@
 # define ROT_DEGREES	5
 # define MV_PIXELS		5
 # define WH				0xFFFFFF
-# define INIT t_canvas *c = (t_canvas *)param; t_vars *v = malloc(sizeof(t_vars));
 
 /*
 ** ------ STRUCTS ------
@@ -70,7 +67,7 @@ typedef struct	s_img
 	int			height;
 }				t_img;
 
-typedef struct s_canvas
+typedef struct	s_canvas
 {
 	void		*mlx;
 	void		*window;
