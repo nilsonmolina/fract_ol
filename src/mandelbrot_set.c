@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 05:45:36 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 18:23:53 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/22 22:04:07 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	set_ms_vars(t_canvas *c, t_vars *v)
 {
-	v->pr = 1.5 * (v->x - c->img.width / 2) /
-		(0.25 * c->zoom * c->img.width) + c->offset_x;
-	v->pi = (c->start - c->img.height / 2) /
-		(0.25 * c->zoom * c->img.height) + c->offset_y;
+	v->pr = 1.5 * (v->x - c->img->width / 2) /
+		(0.25 * c->zoom * c->img->width) + c->offset_x;
+	v->pi = (c->start - c->img->height / 2) /
+		(0.25 * c->zoom * c->img->height) + c->offset_y;
 	v->n_re = 0;
 	v->n_im = 0;
 	v->o_re = 0;
@@ -46,7 +46,7 @@ void	*mandelbrot_set(void *param)
 	while (c->start < c->end)
 	{
 		v->x = -1;
-		while (++v->x < c->img.width)
+		while (++v->x < c->img->width)
 		{
 			set_ms_vars(c, v);
 			while (++v->i < c->max_iter)

@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 19:01:21 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/23 11:18:03 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ t_canvas	*init(t_fractal f)
 {
 	t_canvas	*c;
 
-	if (!(c = (t_canvas *)malloc(sizeof(t_canvas))))
+	if (!(c = malloc(sizeof(t_canvas))))
 		check_error(0, "failed to malloc canvas.");
+	if (!(c->v = malloc(sizeof(t_vars))))
+		check_error(0, "failed to malloc canvas vars.");
+	if (!(c->img = malloc(sizeof(t_img))))
+		check_error(0, "failed to malloc canvas img.");	
 	c->mlx = mlx_init();
 	c->window = mlx_new_window(c->mlx, WIN_WIDTH, WIN_HEIGHT, "fract_ol");
-	c->img.width = WIN_WIDTH - OFF_X;
-	c->img.height = WIN_HEIGHT - OFF_Y;
-	c->img.ptr = mlx_new_image(c->mlx, c->img.width, c->img.height);
-	c->img.data = (int *)mlx_get_data_addr(c->img.ptr,
-			&c->img.bpp, &c->img.sl, &c->img.e);
+	c->img->width = WIN_WIDTH - OFF_X;
+	c->img->height = WIN_HEIGHT - OFF_Y;
+	c->img->ptr = mlx_new_image(c->mlx, c->img->width, c->img->height);
+	c->img->data = (int *)mlx_get_data_addr(c->img->ptr,
+			&c->img->bpp, &c->img->sl, &c->img->e);
 	c->fractal = f;
 	c->thr_c = 1;
 	c->shft = 0;
@@ -36,7 +40,7 @@ t_canvas	*init(t_fractal f)
 	c->offset_y = 0;
 	c->mouse_x = 0;
 	c->mouse_y = 0;
-	c->color = 1000;
+	c->color = 100;
 	c->menu = 1;
 	return (c);
 }

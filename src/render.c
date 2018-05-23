@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 19:57:44 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/23 11:45:54 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,16 @@ void	put_strings(void *mlx, void *w, t_canvas *c)
 
 void	draw(t_canvas *c)
 {
-	pthread_t	t_arr[c->thr_c];
-	t_canvas	c_arr[c->thr_c];
+	pthread_t	*t_arr;
+	t_canvas	*c_arr;
 	int			i;
 
-	ft_bzero(c->img.data, sizeof(int) * c->img.width * c->img.height);
+	c_arr = malloc(sizeof(t_canvas) * c->thr_c);
+	t_arr = malloc(sizeof(pthread_t) * c->thr_c);
+	mlx_clear_window(c->mlx, c->window);
+	ft_bzero(c->img->data, sizeof(int) * c->img->width * c->img->height);
 	i = -1;
-	while (++i < c->thr_c && (ft_memcpy((void*)&c_arr[i], c, sizeof(t_canvas))))
+	while (++i < c->thr_c && (ft_memcpy((void*)&c_arr[i], (void*)c, sizeof(t_canvas))))
 	{
 		c_arr[i].start = i * (WIN_WIDTH / c->thr_c);
 		c_arr[i].end = (i + 1) * (WIN_WIDTH / c->thr_c);
@@ -96,7 +99,9 @@ void	draw(t_canvas *c)
 		create_fractal_thread(&c_arr[i], &t_arr[i]);
 	while (--i >= 0)
 		pthread_join(t_arr[i], NULL);
-	mlx_put_image_to_window(c->mlx, c->window, c->img.ptr, 0, 0);
+	free(t_arr);
+	free(c_arr);
+	mlx_put_image_to_window(c->mlx, c->window, c->img->ptr, 0, 0);
 	if (c->menu > 0)
 		put_strings(c->mlx, c->window, c);
 }
@@ -105,10 +110,14 @@ void	put_img_vector(t_canvas *c, int x, int y, int color)
 {
 	int	i;
 
-	if (x > c->img.width - 1 || x < 1)
+	if (x > c->img->width - 1 || x < 1)
 		return ;
-	i = (x) + ((y) * c->img.width);
-	if (i >= (c->img.width * c->img.height) || i < 0)
+	i = (x) + ((y) * c->img->width);
+	if (i >= (c->img->width * c->img->height) || i < 0)
 		return ;
-	c->img.data[i] = color * c->color;
+	color *= c->color;
+	if (color < 0)
+		c->img->data[i] = 0;
+	else
+		c->img->data[i] = color;
 }

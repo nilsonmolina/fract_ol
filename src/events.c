@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 17:28:07 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/22 22:50:13 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 int		key_hold(int key, t_canvas *c)
 {
 	if (key == 53)
-	{
-		mlx_destroy_image(c->mlx, c->img.ptr);
-		mlx_destroy_window(c->mlx, c->window);
 		exit(0);
-	}
 	key == 8 ? change_color(c) : 0;
 	key == 6 ? zoom(c, 1.25, -1, -1) : 0;
 	key == 7 ? zoom(c, -1.25, -1, -1) : 0;
@@ -54,7 +50,7 @@ int		key_up(int key, t_canvas *c)
 int		mouse_motion(int x, int y, t_canvas *c)
 {
 	if (c->fractal == julia &&
-		x >= 0 && y >= 0 && x <= c->img.width && y <= c->img.height)
+		x >= 0 && y >= 0 && x <= c->img->width && y <= c->img->height)
 	{
 		c->mouse_x = x;
 		c->mouse_y = y;

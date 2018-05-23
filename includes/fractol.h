@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/21 18:14:17 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/22 22:57:39 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "mlx.h"
 # include <math.h>
 # include <pthread.h>
+
+# include <stdio.h> // delete me
 
 /*
 ** ------ VARIABLES ------
@@ -71,9 +73,9 @@ typedef struct	s_canvas
 {
 	void		*mlx;
 	void		*window;
-	t_img		img;
-	t_fractal	fractal;
+	t_img		*img;
 	t_vars		*v;
+	t_fractal	fractal;	
 	int			start;
 	int			end;
 	int			color;
