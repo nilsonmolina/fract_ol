@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/22 22:50:13 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 11:26:55 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		key_hold(int key, t_canvas *c)
 
 int		key_up(int key, t_canvas *c)
 {
+	// printf("%d\n", key);
 	key == 0 ? move(c, &c->offset_x, -0.3) : 0;
 	key == 2 ? move(c, &c->offset_x, 0.3) : 0;
 	key == 1 ? move(c, &c->offset_y, 0.3) : 0;
@@ -41,6 +42,7 @@ int		key_up(int key, t_canvas *c)
 	key == 20 ? switch_fractal(c, 3) : 0;
 	key == 21 ? switch_fractal(c, 4) : 0;
 	key == 23 ? switch_fractal(c, 5) : 0;
+	key == 22 ? switch_fractal(c, 6) : 0;
 	key == 46 ? toggle_menu(c) : 0;
 	key == 49 ? switch_fractal(c, c->fractal) : 0;
 	key == 257 ? c->shft = 0 : 0;
@@ -49,7 +51,7 @@ int		key_up(int key, t_canvas *c)
 
 int		mouse_motion(int x, int y, t_canvas *c)
 {
-	if (c->fractal == julia &&
+	if ((c->fractal == julia) &&
 		x >= 0 && y >= 0 && x <= c->img->width && y <= c->img->height)
 	{
 		c->mouse_x = x;
@@ -63,6 +65,7 @@ int		mouse_click(int mouse, int x, int y, t_canvas *c)
 {
 	mouse == 4 ? zoom(c, 1.25, x, y) : 0;
 	mouse == 5 ? zoom(c, -1.25, x, y) : 0;
+	printf("x %d, y %d\n", x, y);
 	return (0);
 }
 

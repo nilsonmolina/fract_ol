@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/22 22:57:39 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 11:22:30 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef enum	e_fractal
 	burning_ship,
 	julia,
 	swirlia,
-	conan
+	julia_shield,
+	testing
 }				t_fractal;
 
 typedef struct	s_img
@@ -127,5 +128,7 @@ void			change_threads(t_canvas *c);
 void			*mandelbrot_set(void *param);
 void			*julia_set(void *param);
 void			switch_fractal(t_canvas *c, t_fractal f);
+char			*simple_itoa(int nbr);
+
 
 #endif

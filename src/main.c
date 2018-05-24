@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/23 11:18:03 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 11:23:54 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			main(int argc, char **argv)
 	if (argc != 2 || argv[1][1] != '\0')
 		usage();
 	f = argv[1][0] - '0';
-	if (!(1 <= f && f <= 5))
+	if (!(1 <= f && f <= 6))
 		usage();
 	c = init(f);
 	draw(c);
@@ -73,6 +73,8 @@ void		usage(void)
 	ft_putstr("2: Burning Ship\n");
 	ft_putstr("3: Julia\n");
 	ft_putstr("4: Swirlia\n");
+	ft_putstr("5: Julia Shield\n");
+	ft_putstr("6: ?\n");
 	exit(0);
 }
 

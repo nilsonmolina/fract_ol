@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/23 11:45:54 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 11:25:33 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	create_fractal_thread(t_canvas *c, pthread_t *t)
 		pthread_create(t, NULL, julia_set, c);
 	else if (c->fractal == swirlia)
 		pthread_create(t, NULL, julia_set, c);
-	else if (c->fractal == conan)
+	else if (c->fractal == julia_shield)
 		pthread_create(t, NULL, julia_set, c);
+	else if (c->fractal == 6)
+		pthread_create(t, NULL, mandelbrot_set, c);
 }
 
 void	put_controls(void *mlx, void *w)
@@ -52,40 +54,36 @@ void	put_controls(void *mlx, void *w)
 
 void	put_strings(void *mlx, void *w, t_canvas *c)
 {
-	char		*str;
+	char		*iters;	
+	char		*threads;
 	t_fractal	f;
 
 	f = c->fractal;
+	iters = ft_itoa(c->max_iter);
+	threads = ft_itoa(c->thr_c);
 	mlx_string_put(mlx, w, 10, 0, WH, "--------------");
-	if (f == mandelbrot)
-		mlx_string_put(mlx, w, 20, 15, WH, "Mandelbrot");
-	else if (f == burning_ship)
-		mlx_string_put(mlx, w, 20, 15, WH, "Burning Ship");
-	else if (f == julia)
-		mlx_string_put(mlx, w, 20, 15, WH, "Julia");
-	else if (f == swirlia)
-		mlx_string_put(mlx, w, 20, 15, WH, "Swirlia");
-	else if (f == conan)
-		mlx_string_put(mlx, w, 20, 15, WH, "Conan");
+	f == mandelbrot ? mlx_string_put(mlx, w, 20, 15, WH, "Mandelbrot") : 0;
+	f == burning_ship ? mlx_string_put(mlx, w, 20, 15, WH, "Burning Ship") : 0;
+	f == julia ? mlx_string_put(mlx, w, 20, 15, WH, "Julia") : 0;
+	f == swirlia ? mlx_string_put(mlx, w, 20, 15, WH, "Swirlia") : 0;
+	f == julia_shield ? mlx_string_put(mlx, w, 20, 15, WH, "Julias Shield") : 0;
 	mlx_string_put(mlx, w, 10, 30, WH, "--------------");
 	mlx_string_put(mlx, w, 15, 50, WH, "Iters:");
-	mlx_string_put(mlx, w, 100, 50, WH, str = ft_itoa(c->max_iter));
-	free(str);
+	mlx_string_put(mlx, w, 100, 50, WH, iters);
 	mlx_string_put(mlx, w, 15, 70, WH, "Threads:");
-	mlx_string_put(mlx, w, 100, 70, WH, str = ft_itoa(c->thr_c));
-	free(str);
-	if (c->menu > 1)
+	mlx_string_put(mlx, w, 100, 70, WH, threads);
+	free(iters);
+	free(threads);
+	if (c->menu == 2)
 		put_controls(mlx, w);
 }
 
 void	draw(t_canvas *c)
 {
-	pthread_t	*t_arr;
-	t_canvas	*c_arr;
+	pthread_t	t_arr[c->thr_c];
+	t_canvas	c_arr[c->thr_c];
 	int			i;
 
-	c_arr = malloc(sizeof(t_canvas) * c->thr_c);
-	t_arr = malloc(sizeof(pthread_t) * c->thr_c);
 	mlx_clear_window(c->mlx, c->window);
 	ft_bzero(c->img->data, sizeof(int) * c->img->width * c->img->height);
 	i = -1;
@@ -99,10 +97,8 @@ void	draw(t_canvas *c)
 		create_fractal_thread(&c_arr[i], &t_arr[i]);
 	while (--i >= 0)
 		pthread_join(t_arr[i], NULL);
-	free(t_arr);
-	free(c_arr);
 	mlx_put_image_to_window(c->mlx, c->window, c->img->ptr, 0, 0);
-	if (c->menu > 0)
+	if (c->menu == 1 || c->menu == 2)
 		put_strings(c->mlx, c->window, c);
 }
 
