@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 11:22:30 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 19:46:30 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include "mlx.h"
 # include <math.h>
 # include <pthread.h>
-
-# include <stdio.h> // delete me
 
 /*
 ** ------ VARIABLES ------
@@ -75,8 +73,7 @@ typedef struct	s_canvas
 	void		*mlx;
 	void		*window;
 	t_img		*img;
-	t_vars		*v;
-	t_fractal	fractal;	
+	t_fractal	fractal;
 	int			start;
 	int			end;
 	int			color;
@@ -129,6 +126,5 @@ void			*mandelbrot_set(void *param);
 void			*julia_set(void *param);
 void			switch_fractal(t_canvas *c, t_fractal f);
 char			*simple_itoa(int nbr);
-
 
 #endif

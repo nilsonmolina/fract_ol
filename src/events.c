@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 11:26:55 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 19:41:19 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		key_hold(int key, t_canvas *c)
 
 int		key_up(int key, t_canvas *c)
 {
-	// printf("%d\n", key);
 	key == 0 ? move(c, &c->offset_x, -0.3) : 0;
 	key == 2 ? move(c, &c->offset_x, 0.3) : 0;
 	key == 1 ? move(c, &c->offset_y, 0.3) : 0;
@@ -65,7 +64,6 @@ int		mouse_click(int mouse, int x, int y, t_canvas *c)
 {
 	mouse == 4 ? zoom(c, 1.25, x, y) : 0;
 	mouse == 5 ? zoom(c, -1.25, x, y) : 0;
-	printf("x %d, y %d\n", x, y);
 	return (0);
 }
 

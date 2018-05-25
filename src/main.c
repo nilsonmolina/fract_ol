@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 11:23:54 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 19:55:03 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ t_canvas	*init(t_fractal f)
 {
 	t_canvas	*c;
 
-	if (!(c = malloc(sizeof(t_canvas))))
+	if ((!(c = malloc(sizeof(t_canvas)))))
 		check_error(0, "failed to malloc canvas.");
-	if (!(c->v = malloc(sizeof(t_vars))))
-		check_error(0, "failed to malloc canvas vars.");
-	if (!(c->img = malloc(sizeof(t_img))))
-		check_error(0, "failed to malloc canvas img.");	
+	if ((!(c->img = malloc(sizeof(t_img)))))
+		check_error(0, "failed to malloc canvas.");
 	c->mlx = mlx_init();
 	c->window = mlx_new_window(c->mlx, WIN_WIDTH, WIN_HEIGHT, "fract_ol");
 	c->img->width = WIN_WIDTH - OFF_X;
@@ -32,8 +30,6 @@ t_canvas	*init(t_fractal f)
 	c->fractal = f;
 	c->thr_c = 1;
 	c->shft = 0;
-	c->start = 0;
-	c->end = 0;
 	c->zoom = 1;
 	c->max_iter = 50;
 	c->offset_x = 0;

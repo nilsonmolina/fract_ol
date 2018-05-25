@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmolina <nmolina@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 11:25:33 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/24 19:42:04 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	put_controls(void *mlx, void *w)
 
 void	put_strings(void *mlx, void *w, t_canvas *c)
 {
-	char		*iters;	
+	char		*iters;
 	char		*threads;
 	t_fractal	f;
 
@@ -87,7 +87,7 @@ void	draw(t_canvas *c)
 	mlx_clear_window(c->mlx, c->window);
 	ft_bzero(c->img->data, sizeof(int) * c->img->width * c->img->height);
 	i = -1;
-	while (++i < c->thr_c && (ft_memcpy((void*)&c_arr[i], (void*)c, sizeof(t_canvas))))
+	while (++i < c->thr_c && (ft_memcpy(&c_arr[i], (void*)c, sizeof(t_canvas))))
 	{
 		c_arr[i].start = i * (WIN_WIDTH / c->thr_c);
 		c_arr[i].end = (i + 1) * (WIN_WIDTH / c->thr_c);
