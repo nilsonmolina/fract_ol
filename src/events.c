@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:14:06 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 19:41:19 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/26 01:26:52 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		key_up(int key, t_canvas *c)
 	key == 21 ? switch_fractal(c, 4) : 0;
 	key == 23 ? switch_fractal(c, 5) : 0;
 	key == 22 ? switch_fractal(c, 6) : 0;
+	key == 26 ? switch_fractal(c, 7) : 0;
+	key == 28 ? switch_fractal(c, 8) : 0;
 	key == 46 ? toggle_menu(c) : 0;
 	key == 49 ? switch_fractal(c, c->fractal) : 0;
 	key == 257 ? c->shft = 0 : 0;

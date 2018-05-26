@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:44:25 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 19:20:09 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/26 01:28:49 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ void	set_js_vars(t_canvas *c, t_vars *v)
 	v->i = -1;
 }
 
+void	more_fractals(t_canvas *c, t_vars *v)
+{
+	if (c->fractal == julia_shield)
+	{
+		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 0 / 300) /
+			(v->o_re * v->o_re - v->o_im * v->o_im);
+		v->n_im = 2 * v->o_re * v->o_im + (0.27015 * 2 / 300) /
+			(2 * v->o_re * v->o_im);
+	}
+	else if (c->fractal == dulia)
+	{
+		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 100 / 300);
+		v->n_im = fabs(2 * v->o_re * v->o_im) + (0.27015 * 180 / 300);
+	}
+	else if (c->fractal == dulia2)
+	{
+		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 10 / 300);
+		v->n_im = 2 * fabs(v->o_re * v->o_im) + (0.27015 * 313 / 300);
+	}
+}
+
 void	set_new(t_canvas *c, t_vars *v)
 {
 	v->o_re = v->n_re;
@@ -42,13 +63,13 @@ void	set_new(t_canvas *c, t_vars *v)
 		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 352 / 300);
 		v->n_im = 2 * v->o_re * v->o_im + (0.27015 * 180 / 300);
 	}
-	else if (c->fractal == julia_shield)
+	else if (c->fractal == swirlia2)
 	{
-		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 0 / 300) /
-			(v->o_re * v->o_re - v->o_im * v->o_im);
-		v->n_im = 2 * v->o_re * v->o_im + (0.27015 * 2 / 300) /
-			(2 * v->o_re * v->o_im);
+		v->n_re = v->o_re * v->o_re - v->o_im * v->o_im + (-0.7 * 288 / 300);
+		v->n_im = 2 * v->o_re * v->o_im + (0.27015 * 402 / 300);
 	}
+	else
+		more_fractals(c, v);
 }
 
 void	*julia_set(void *param)

@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:18:52 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 19:42:04 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/26 00:56:28 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	create_fractal_thread(t_canvas *c, pthread_t *t)
 		pthread_create(t, NULL, julia_set, c);
 	else if (c->fractal == julia_shield)
 		pthread_create(t, NULL, julia_set, c);
-	else if (c->fractal == 6)
-		pthread_create(t, NULL, mandelbrot_set, c);
+	else if (c->fractal == swirlia2)
+		pthread_create(t, NULL, julia_set, c);
+	else if (c->fractal == dulia)
+		pthread_create(t, NULL, julia_set, c);
+	else if (c->fractal == dulia2)
+		pthread_create(t, NULL, julia_set, c);
 }
 
 void	put_controls(void *mlx, void *w)
@@ -64,9 +68,12 @@ void	put_strings(void *mlx, void *w, t_canvas *c)
 	mlx_string_put(mlx, w, 10, 0, WH, "--------------");
 	f == mandelbrot ? mlx_string_put(mlx, w, 20, 15, WH, "Mandelbrot") : 0;
 	f == burning_ship ? mlx_string_put(mlx, w, 20, 15, WH, "Burning Ship") : 0;
+	f == dulia ? mlx_string_put(mlx, w, 20, 15, WH, "Dulia") : 0;
 	f == julia ? mlx_string_put(mlx, w, 20, 15, WH, "Julia") : 0;
 	f == swirlia ? mlx_string_put(mlx, w, 20, 15, WH, "Swirlia") : 0;
+	f == swirlia2 ? mlx_string_put(mlx, w, 20, 15, WH, "Swirlia2") : 0;
 	f == julia_shield ? mlx_string_put(mlx, w, 20, 15, WH, "Julias Shield") : 0;
+	f == dulia2 ? mlx_string_put(mlx, w, 20, 15, WH, "Dulia2") : 0;
 	mlx_string_put(mlx, w, 10, 30, WH, "--------------");
 	mlx_string_put(mlx, w, 15, 50, WH, "Iters:");
 	mlx_string_put(mlx, w, 100, 50, WH, iters);

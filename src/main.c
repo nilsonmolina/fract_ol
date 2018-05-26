@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 22:11:24 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 19:55:03 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/26 01:02:49 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_canvas	*init(t_fractal f)
 	c->offset_y = 0;
 	c->mouse_x = 0;
 	c->mouse_y = 0;
-	c->color = 100;
+	c->color = 1000;
 	c->menu = 1;
 	return (c);
 }
@@ -49,7 +49,7 @@ int			main(int argc, char **argv)
 	if (argc != 2 || argv[1][1] != '\0')
 		usage();
 	f = argv[1][0] - '0';
-	if (!(1 <= f && f <= 6))
+	if (!(1 <= f && f <= 8))
 		usage();
 	c = init(f);
 	draw(c);
@@ -69,8 +69,10 @@ void		usage(void)
 	ft_putstr("2: Burning Ship\n");
 	ft_putstr("3: Julia\n");
 	ft_putstr("4: Swirlia\n");
-	ft_putstr("5: Julia Shield\n");
-	ft_putstr("6: ?\n");
+	ft_putstr("5: Swirlia2\n");
+	ft_putstr("6: Julia Shield\n");
+	ft_putstr("7: Dulia\n");
+	ft_putstr("8: Dulia2\n");
 	exit(0);
 }
 

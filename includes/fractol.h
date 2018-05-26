@@ -6,7 +6,7 @@
 /*   By: nmolina <nmolina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:51:48 by nmolina           #+#    #+#             */
-/*   Updated: 2018/05/24 21:14:49 by nmolina          ###   ########.fr       */
+/*   Updated: 2018/05/26 01:28:17 by nmolina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ typedef enum	e_fractal
 	burning_ship,
 	julia,
 	swirlia,
+	swirlia2,
 	julia_shield,
-	testing
+	dulia,
+	dulia2,
+	dulia3,
 }				t_fractal;
 
 typedef struct	s_img
